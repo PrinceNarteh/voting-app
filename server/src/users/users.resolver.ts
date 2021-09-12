@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreateUserInput } from './dto/create-user.input';
+import { ErrorResponse } from 'src/shared/error.response';
+import { SignUpInput } from './dto/signup.input';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
@@ -12,8 +13,8 @@ export class UsersResolver {
     return this.usersService.findAll();
   }
 
-  @Mutation((returns) => User)
-  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.usersService.create(createUserInput);
+  @Mutation((returns) => [ErrorResponse], { nullable: true })
+  signUp(@Args('signUpInput') signUpInput: SignUpInput) {
+    return this.usersService.create(signUpInput);
   }
 }

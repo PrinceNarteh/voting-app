@@ -9,15 +9,20 @@ type User {
   password: String!
 }
 
+type ErrorResponse {
+  path: String!
+  message: String!
+}
+
 type Query {
   users: [User!]!
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
+  signUp(signUpInput: SignUpInput!): [ErrorResponse!]
 }
 
-input CreateUserInput {
+input SignUpInput {
   username: String!
   email: String!
   password: String!
