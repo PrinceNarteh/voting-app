@@ -14,6 +14,7 @@ export class TypeOrmConfig {
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
       entities: ['dist/**/**/*.entity{.ts,.js}'],
+      subscribers: ['dist/subscribers/*.subscriber{.ts,.js}'],
       synchronize: true,
     };
   }
