@@ -5,6 +5,7 @@ import { ErrorResponse } from 'src/shared/error.response';
 import { SignUpInput } from './dto/signup.input';
 import { User } from './entities/user.entity';
 import { UsersRepository } from './users.repository';
+import { Email } from '../utils/email';
 
 @Injectable()
 export class UsersService {
@@ -30,8 +31,9 @@ export class UsersService {
       ];
     }
 
-    const user = this.usersRepository.create(signUpInput);
-    await this.usersRepository.save(user);
+    const createdUser = this.usersRepository.create(signUpInput);
+    const user = await this.usersRepository.save(createdUser);
+    await Email.s;
     return null;
   }
 }
