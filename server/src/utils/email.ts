@@ -2,16 +2,16 @@ import { ConfigService } from '@nestjs/config';
 import * as sgMail from '@sendgrid/mail';
 import { redis } from '../redis';
 import { v4 as uuid } from 'uuid';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class Email {
   static apiKey: string;
 
-  constructor(private configService: ConfigService) {
-    Email.apiKey = configService.get<string>('SG_KEY');
-  }
+  constructor(private configService: ConfigService) {}
 
-  static async sendMail(email: string, userId: string) {
-    sgMail.setApiKey();
+  async sendMail(email: string, userId: string) {
+    sgMail.setApiKey(this.configService.get<string>('SG_KEY'));
 
     const msg = {
       to: email, // Change to your recipient

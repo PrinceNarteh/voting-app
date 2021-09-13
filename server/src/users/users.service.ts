@@ -12,6 +12,7 @@ export class UsersService {
   constructor(
     @InjectRepository(UsersRepository)
     private usersRepository: UsersRepository,
+    private email: Email,
   ) {}
 
   async findAll(): Promise<User[]> {
@@ -33,7 +34,7 @@ export class UsersService {
 
     const createdUser = this.usersRepository.create(signUpInput);
     const user = await this.usersRepository.save(createdUser);
-    await Email.s;
+    await this.email.sendMail(user.email, user.id);
     return null;
   }
 }
