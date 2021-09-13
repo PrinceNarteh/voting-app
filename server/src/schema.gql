@@ -20,6 +20,7 @@ type Query {
 
 type Mutation {
   signUp(signUpInput: SignUpInput!): [ErrorResponse!]
+  signIn(signInInput: SignUpInput!): [ErrorResponse!]
 }
 
 input SignUpInput {

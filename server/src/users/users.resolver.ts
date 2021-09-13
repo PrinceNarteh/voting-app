@@ -17,4 +17,9 @@ export class UsersResolver {
   signUp(@Args('signUpInput') signUpInput: SignUpInput) {
     return this.usersService.create(signUpInput);
   }
+
+  @Mutation((returns) => [ErrorResponse], { nullable: true })
+  signIn(@Args('signInInput') signInInput: SignUpInput) {
+    return this.usersService.create(signInInput);
+  }
 }
